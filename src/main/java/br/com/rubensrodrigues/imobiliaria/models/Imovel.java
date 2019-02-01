@@ -1,10 +1,25 @@
 package br.com.rubensrodrigues.imobiliaria.models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
 public class Imovel {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Integer referencia;
 	private Integer cep;
@@ -14,8 +29,16 @@ public class Imovel {
 	private String bairro;
 	private String cidade;
 	private String uf;
+	@Column(columnDefinition = "text")
+	private String descricao;
+	@OneToMany(fetch=FetchType.EAGER)
 	private List<Foto> fotos = new ArrayList<Foto>();
+	@ManyToOne
 	private Corretor corretor;
+	@DateTimeFormat
+	private Calendar dataCriacao;
+	@DateTimeFormat
+	private Calendar dataModificacao;
 	
 	public Integer getId() {
 		return id;
@@ -82,5 +105,23 @@ public class Imovel {
 	}
 	public void setCorretor(Corretor corretor) {
 		this.corretor = corretor;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	public Calendar getDataCriacao() {
+		return dataCriacao;
+	}
+	public void setDataCriacao(Calendar dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+	public Calendar getDataModificacao() {
+		return dataModificacao;
+	}
+	public void setDataModificacao(Calendar dataModificacao) {
+		this.dataModificacao = dataModificacao;
 	}
 }
