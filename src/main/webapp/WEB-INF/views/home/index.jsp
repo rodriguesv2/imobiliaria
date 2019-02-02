@@ -8,6 +8,7 @@
 	</head>
 	<body>
 		<a href="/imovel/formulario">Inserir Imovel</a>
+		<a href="/imagem/form">Inserir Foto</a>
 		<h1>Imobiliaria</h1> 
 	</body>
 </html>

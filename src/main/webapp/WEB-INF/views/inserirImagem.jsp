@@ -12,7 +12,7 @@
 		<br>
 		<form action="${s:mvcUrl('IC#gravar').build() }" method="post" enctype="multipart/form-data" >
 			<label>Arquivo:</label>
-			<input type="file" name="arquivo"/>
+			<input type="file" multiple="multiple" name="arquivos"/>
 			<button type="submit">Enviar</button>
 		</form>
 		

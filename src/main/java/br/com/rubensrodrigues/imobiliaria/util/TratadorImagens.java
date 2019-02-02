@@ -31,12 +31,12 @@ public class TratadorImagens {
 	}
 	
 	
-	public File salvar(MultipartFile arquivo) throws IllegalStateException, IOException {
+	public void salvar(MultipartFile arquivo, String novoNome) throws IllegalStateException, IOException {
 		String realPath = request.getServletContext().getRealPath("arquivos-carregados");
-		File file = new File(realPath + "/" + geraNome());
+		File file = new File(realPath + "/" + novoNome);
 		
 		arquivo.transferTo(file);
-		return file;
+		redimensionaImagem(file);
 		
 	}
 	
@@ -49,7 +49,7 @@ public class TratadorImagens {
 			return false;
 	}
 	
-	public void redimensionaImagem(File arquivo) throws IOException {
+	private void redimensionaImagem(File arquivo) throws IOException {
         BufferedImage imagem = ImageIO.read(arquivo);
         
         float alturaSugerida = 700;
