@@ -1,5 +1,6 @@
 package br.com.rubensrodrigues.imobiliaria.models;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -23,9 +24,9 @@ public class Imovel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Integer referencia;
-	private Integer cep;
-	private String endereço;
+	private BigInteger referencia;
+	private String cep;
+	private String endereco;
 	private Integer numero;
 	private String complemento;
 	private String bairro;
@@ -50,23 +51,29 @@ public class Imovel {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getReferencia() {
+	public BigInteger getReferencia() {
 		return referencia;
 	}
-	public void setReferencia(Integer referencia) {
+	public void setReferencia(BigInteger referencia) {
 		this.referencia = referencia;
 	}
-	public Integer getCep() {
+	public String getCep() {
 		return cep;
 	}
-	public void setCep(Integer cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	public String getEndereço() {
-		return endereço;
+	public String getEndereco() {
+		return endereco;
 	}
-	public void setEndereço(String endereço) {
-		this.endereço = endereço;
+	public TipoImovel getTipo() {
+		return tipo;
+	}
+	public void setTipo(TipoImovel tipo) {
+		this.tipo = tipo;
+	}
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 	public Integer getNumero() {
 		return numero;

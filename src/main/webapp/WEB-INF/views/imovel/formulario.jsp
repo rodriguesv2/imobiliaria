@@ -1,16 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title>Inserir Imoveis</title>
+		<c:url value="/resources/css" var="cssPath"/>
+		<c:url value="/resources/js" var="jsPath"/>
+		<link rel="stylesheet" href="${cssPath}/bootstrap.min.css"/>
 	</head>
 	<body>
-		<div>
+		<div class="container">
 			<h1>Formulario</h1>
-			<form action="" method="post">
-				<div>
+			<form action="${s:mvcUrl('IC#salvarImovel').build() }" method="post">
+				<div class="form-group">
 					<label>Nº de referência</label>
 					<input type="text" name="referencia"/>
 				</div>
@@ -20,11 +26,11 @@
 				</div>
 				<div>
 					<label>CEP</label>
-					<input type="number" name="cep"/>
+					<input id="cep" type="text" name="cep" pattern="[0-9]{8}"/>
 				</div>
 				<div>
 					<label>Endereço</label>
-					<input type="text" name="endereco"/>
+					<input id="endereco" type="text" name="endereco"/>
 					<label>Numero</label>
 					<input type="number" name="numero"/>
 				</div>
@@ -34,45 +40,27 @@
 				</div>
 				<div>
 					<label>Bairro</label>
-					<input type="text" name="bairro"/>
+					<input id="bairro" type="text" name="bairro"/>
 				</div>
 				<div>
 					<label>Cidade</label>
-					<input type="text" name="cidade"/>
+					<input id="cidade" type="text" name="cidade"/>
 					<label>UF</label>
-					<select name="UF">
-						<option value="AC">AC</option>
-						<option value="AL">AL</option>
-						<option value="AM">AM</option>
-						<option value="AP">AP</option>
-						<option value="BA">BA</option>
-						<option value="CE">CE</option>
-						<option value="DF">DF</option>
-						<option value="ES">ES</option>
-						<option value="GO">GO</option>
-						<option value="MA">MA</option>
-						<option value="MG">MG</option>
-						<option value="MS">MS</option>
-						<option value="MT">MT</option>
-						<option value="PA">PA</option>
-						<option value="PB">PB</option>
-						<option value="PE">PE</option>
-						<option value="PI">PI</option>
-						<option value="PR">PR</option>
-						<option value="RJ">RJ</option>
-						<option value="RN">RN</option>
-						<option value="RO">RO</option>
-						<option value="RR">RR</option>
-						<option value="RS">RS</option>
-						<option value="SC">SC</option>
-						<option value="SE">SE</option>
-						<option value="SP">SP</option>
-						<option value="TO">TO</option>
+					<input id="uf" type="text" name="uf" maxlength="2"/>
+				</div>
+				<div>
+					<label>Tipo</label>
+					<select name="tipo">
+						<c:forEach items="${tipoImovel}" var="tipo">
+							<option value="${tipo}">${tipo}</option>
+						</c:forEach>
 					</select>
 				</div>
 				<button type="submit">Enviar</button>
 			</form>
 		</div>
+		<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+		<script src="${jsPath}/cep.js"></script>
 	</body>
 </html>
 

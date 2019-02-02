@@ -7,6 +7,7 @@
 		<title>Home page</title>
 	</head>
 	<body>
+		<a href="/imovel/formulario">Inserir Imovel</a>
 		<h1>Imobiliaria</h1> 
 	</body>
 </html>
