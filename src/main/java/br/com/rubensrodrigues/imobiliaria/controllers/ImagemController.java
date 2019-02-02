@@ -1,5 +1,6 @@
 package br.com.rubensrodrigues.imobiliaria.controllers;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,12 @@ public class ImagemController {
 	public ModelAndView gravar(MultipartFile arquivo) throws IllegalStateException, IOException {
 		ModelAndView modelAndView = new ModelAndView("redirect:/");
 		
-		tratador.salvar(arquivo);
+		if(tratador.ehImagemValida(arquivo)) {
+			File file = tratador.salvar(arquivo);
+			tratador.redimensionaImagem(file);
+		}
+		else
+			System.out.println("O arquivo não é valido");
 		
 		return modelAndView;
 	}
