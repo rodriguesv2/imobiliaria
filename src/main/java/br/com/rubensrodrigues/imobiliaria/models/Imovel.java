@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,6 +41,8 @@ public class Imovel {
 	private Calendar dataCriacao;
 	@DateTimeFormat
 	private Calendar dataModificacao;
+	@Enumerated(EnumType.STRING)
+	private TipoImovel tipo;
 	
 	public Integer getId() {
 		return id;
