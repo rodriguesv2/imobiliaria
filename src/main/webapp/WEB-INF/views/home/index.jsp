@@ -105,8 +105,8 @@
   <!-- Footer Elements -->
 
   <!-- Copyright -->
-  <div class="">
-    <a href="#"> Embu das Artes - SP</a>
+  <div>
+    <a class="nav-link" href="#"> Embu das Artes - SP</a>
   </div>
   <!-- Copyright -->
 

@@ -25,6 +25,10 @@
 					<textarea rows="8" cols="40" name="descricao"></textarea>
 				</div>
 				<div>
+					<label>Valor</label>
+					<input type="text" name="valor" placeholder="0,00"/>
+				</div>
+				<div>
 					<label>CEP</label>
 					<input id="cep" type="text" name="cep" pattern="[0-9]{8}"/>
 				</div>

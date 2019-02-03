@@ -72,7 +72,7 @@ public class ImovelController {
 			}
 		}
 		
-		if(fotos.isEmpty())
+		if(!fotos.isEmpty())
 			imovel.setFotos(fotos);
 		
 		imovelDAO.gravar(imovel);

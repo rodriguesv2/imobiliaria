@@ -46,6 +46,7 @@ public class Imovel {
 	private Calendar dataModificacao;
 	@Enumerated(EnumType.STRING)
 	private TipoImovel tipo;
+	private float valor;
 	
 	public Integer getId() {
 		return id;
@@ -136,5 +137,11 @@ public class Imovel {
 	}
 	public void setDataModificacao(Calendar dataModificacao) {
 		this.dataModificacao = dataModificacao;
+	}
+	public float getValor() {
+		return valor;
+	}
+	public void setValor(float valor) {
+		this.valor = valor;
 	}
 }

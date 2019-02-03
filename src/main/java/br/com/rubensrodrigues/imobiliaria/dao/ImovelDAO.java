@@ -1,5 +1,7 @@
 package br.com.rubensrodrigues.imobiliaria.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -17,5 +19,9 @@ public class ImovelDAO{
 	
 	public void gravar(Imovel imovel){
 		manager.persist(imovel);
+	}
+	
+	public List<Imovel> lista() {
+		return manager.createQuery("select i from Imovel i", Imovel.class).getResultList();
 	}
 }
