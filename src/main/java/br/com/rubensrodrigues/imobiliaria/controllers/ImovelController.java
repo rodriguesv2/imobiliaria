@@ -40,7 +40,8 @@ public class ImovelController {
 	}
 	
 	/*O metodo não persiste o imovel, apenas o coloca na sessão e vai para o formulario de adição de imagens (salvarFotos(MultipartFile)), assim não duplica no banco com o F5,
-	e principalmente, aguarda as fotos para persistir.*/
+	*e principalmente, aguarda as fotos para persistir.
+	*/
 	
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
 	public ModelAndView salvarImovel(Imovel imovel) {

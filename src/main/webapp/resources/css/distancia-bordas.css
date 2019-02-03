@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+#body {
+	
+	padding-bottom: 40px;
+	padding-top: 40px;
+}
+
+footer {
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	color: white;
+}
+
+hr {
+	border-top: 1px solid black;
+}
