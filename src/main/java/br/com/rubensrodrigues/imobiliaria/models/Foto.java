@@ -13,6 +13,12 @@ public class Foto {
 	private Integer id;
 	private String nomeArquivo;
 	
+	public Foto() {}
+	
+	public Foto(String nomeArquivo) {
+		this.nomeArquivo = nomeArquivo;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

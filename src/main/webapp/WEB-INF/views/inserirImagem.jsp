@@ -10,9 +10,9 @@
 	<body>
 		<h1>Inserir imagem</h1>
 		<br>
-		<form action="${s:mvcUrl('IC#gravar').build() }" method="post" enctype="multipart/form-data" >
+		<form action="${s:mvcUrl('FC#gravar').build() }" method="post" enctype="multipart/form-data" >
 			<label>Arquivo:</label>
-			<input type="file" multiple="multiple" name="arquivos"/>
+			<input type="file" multiple="multiple" name="arquivos" accept=".jpg,.jpeg,.gif,.png"/>
 			<button type="submit">Enviar</button>
 		</form>
 		
