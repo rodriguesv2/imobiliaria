@@ -21,7 +21,8 @@ public class HomeController{
 		ModelAndView modelAndView = new ModelAndView("home/index");
 		
 		List<Imovel> imoveis = imovelDAO.lista();
-		
+		modelAndView.addObject("imoveis", imoveis);
+
 		return modelAndView;
 	}
 }

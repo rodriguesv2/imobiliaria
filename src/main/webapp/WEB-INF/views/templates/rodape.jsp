@@ -1,5 +1,5 @@
 </div>
-<footer class="page-footer font-small blue pt-4 bg-dark">
+<footer id="rodape" class="page-footer font-small blue pt-4 bg-dark">
 
     <!-- Footer Links -->
     <div class="container-fluid text-center text-md-left">

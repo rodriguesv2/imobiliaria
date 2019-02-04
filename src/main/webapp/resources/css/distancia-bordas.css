@@ -6,7 +6,7 @@
 	padding-top: 40px;
 }
 
-footer {
+#rodape {
 	left: 0;
 	bottom: 0;
 	width: 100%;
@@ -15,4 +15,17 @@ footer {
 
 hr {
 	border-top: 1px solid black;
+}
+
+#imovel {
+	padding-bottom: 10px;
+}
+
+.cidade-uf {
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+
+#link-imovel {
+	display: block;
 }

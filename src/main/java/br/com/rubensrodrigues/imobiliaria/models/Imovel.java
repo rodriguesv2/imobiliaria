@@ -46,7 +46,7 @@ public class Imovel {
 	private Calendar dataModificacao;
 	@Enumerated(EnumType.STRING)
 	private TipoImovel tipo;
-	private float valor;
+	private Double valor;
 	
 	public Integer getId() {
 		return id;
@@ -138,10 +138,24 @@ public class Imovel {
 	public void setDataModificacao(Calendar dataModificacao) {
 		this.dataModificacao = dataModificacao;
 	}
-	public float getValor() {
+	public Double getValor() {
 		return valor;
 	}
-	public void setValor(float valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+	
+	public List<Foto> seisFotos(){
+		List<Foto> seisFotos;
+		
+		try {
+			seisFotos = fotos.subList(0, 6);
+		} catch (IndexOutOfBoundsException e) {
+			if(!fotos.isEmpty())
+				seisFotos = fotos.subList(0, fotos.size());
+			else
+				seisFotos = null;
+		}
+		return seisFotos;
 	}
 }

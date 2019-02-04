@@ -2,18 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<c:url value="/resources/js" var="jsPath"/>
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Inserir Imoveis</title>
-		<c:url value="/resources/css" var="cssPath"/>
-		<c:url value="/resources/js" var="jsPath"/>
-		<link rel="stylesheet" href="${cssPath}/bootstrap.min.css"/>
-	</head>
-	<body>
-		<div class="container">
+<%@ include file="/WEB-INF/views/templates/cabecalho.jsp" %>
+
 			<h1>Formulario</h1>
 			<form action="${s:mvcUrl('IC#salvarImovel').build() }" method="post">
 				<div class="form-group">
@@ -65,8 +57,8 @@
 		</div>
 		<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 		<script src="${jsPath}/cep.js"></script>
-	</body>
-</html>
+
+<%@ include file="/WEB-INF/views/templates/rodape.jsp" %>
 
 
 
