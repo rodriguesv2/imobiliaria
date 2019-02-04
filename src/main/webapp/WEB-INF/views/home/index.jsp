@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 
 <c:url value="/arquivos-carregados" var="imgPath"></c:url>
 
@@ -9,7 +10,7 @@
 			<h1>Imobiliaria</h1> 
 			
 <c:forEach items="${imoveis}" var="imovel">
-	<a id="link-imovel" href="#">
+	<a id="link-imovel" href="${s:mvcUrl('IC#detalhe').arg(0, imovel.id).build()}">
 	<!-- Footer -->
 		<div>
 			<footer id="imovel" class="page-footer font-small mdb-color pt-4 bg-secondary text-white">

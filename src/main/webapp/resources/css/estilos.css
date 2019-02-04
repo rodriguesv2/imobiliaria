@@ -29,3 +29,11 @@ hr {
 #link-imovel {
 	display: block;
 }
+
+.label {
+	font-weight: bold;
+}
+
+#galeria {
+	background: #d7e0df;
+}

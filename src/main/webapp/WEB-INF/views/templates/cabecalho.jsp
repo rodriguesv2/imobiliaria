@@ -9,7 +9,7 @@
 		<title>Imobiliaria</title>
 		<c:url value="/resources/css" var="cssPath"/>
 		<link rel="stylesheet" href="${cssPath}/bootstrap.min.css">
-		<link rel="stylesheet" href="${cssPath}/distancia-bordas.css">
+		<link rel="stylesheet" href="${cssPath}/estilos.css">
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">

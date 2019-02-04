@@ -24,4 +24,8 @@ public class ImovelDAO{
 	public List<Imovel> lista() {
 		return manager.createQuery("select i from Imovel i", Imovel.class).getResultList();
 	}
+	
+	public Imovel find(Integer id) {
+		return manager.find(Imovel.class, id);
+	}
 }

@@ -145,16 +145,18 @@ public class Imovel {
 		this.valor = valor;
 	}
 	
+	/**
+	 * Usado para listar exemplares de no maximo 6 fotos para a apresentação na home.
+	 * @return Uma sub lista com 6 imagens. Caso o imovel tenha menos de 6 fotos, o metodo trará todas sem filtrar quantidade. Porem se o imóvel não tiver fotos, o retorno será uma lista vazia
+	 */
 	public List<Foto> seisFotos(){
-		List<Foto> seisFotos;
+		List<Foto> seisFotos = new ArrayList<Foto>();
 		
 		try {
 			seisFotos = fotos.subList(0, 6);
 		} catch (IndexOutOfBoundsException e) {
 			if(!fotos.isEmpty())
 				seisFotos = fotos.subList(0, fotos.size());
-			else
-				seisFotos = null;
 		}
 		return seisFotos;
 	}

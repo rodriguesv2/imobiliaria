@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,10 +40,9 @@ public class ImovelController {
 		return modelAndView;
 	}
 	
-	/*O metodo não persiste o imovel, apenas o coloca na sessão e vai para o formulario de adição de imagens (salvarFotos(MultipartFile)), assim não duplica no banco com o F5,
+	/*O metodo não persiste o imovel, apenas o coloca na sessão e chama para o formulario de adição de imagens (salvarFotos(MultipartFile)), assim não duplica no banco com o F5,
 	*e principalmente, aguarda as fotos para persistir.
 	*/
-	
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
 	public ModelAndView salvarImovel(Imovel imovel) {
 		ModelAndView modelAndView = new ModelAndView("imovel/inserirImagem");
@@ -54,7 +54,6 @@ public class ImovelController {
 	/*Este recebe o imovel via sessão. As fotos vem via paramentro em um array de MultipartFile. As imagens são renomeadas, gravadas em diretório e os novos nomes são salvos
 	*em objetos e são guardados em uma List para serem carregados junto com o Imovel. Persistencia é CASCADE.
 	*/
-	
 	@RequestMapping(value="/salvarImagens", method=RequestMethod.POST)
 	public ModelAndView salvarFotos(MultipartFile[] arquivos) throws IllegalStateException, IOException {
 		ModelAndView modelAndView = new ModelAndView("redirect:/");		
@@ -77,6 +76,15 @@ public class ImovelController {
 		
 		imovelDAO.gravar(imovel);
 
+		return modelAndView;
+	}
+	
+	@RequestMapping("/detalhe/{id}")
+	public ModelAndView detalhe(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView("imovel/detalhe");
+		
+		modelAndView.addObject("imovel", imovelDAO.find(id));
+		
 		return modelAndView;
 	}
 }
