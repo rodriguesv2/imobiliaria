@@ -70,6 +70,7 @@
 			<label>Foto:</label>
 			<input type="file" name="arquivo" accept=".png,.jpg">
 		</div>
+		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 		<button class="btn btn-primary" type="submit">Salvar</button>
 	</form>
 </div>

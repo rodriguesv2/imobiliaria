@@ -9,6 +9,7 @@
 		<form action="${s:mvcUrl('IC#salvarFotos').build() }" method="post" enctype="multipart/form-data" >
 			<label>Arquivo:</label>
 			<input type="file" multiple="multiple" name="arquivos" accept=".jpg,.jpeg,.gif,.png"/>
+			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 			<button type="submit">Enviar</button>
 		</form>
 
