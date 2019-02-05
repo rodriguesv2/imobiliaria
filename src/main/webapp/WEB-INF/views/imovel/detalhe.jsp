@@ -8,6 +8,7 @@
 <%@ include file="/WEB-INF/views/templates/cabecalho.jsp" %>
 	
 	<h1>Detalhe do Imóvel - Nº Ref: ${imovel.referencia}</h1>
+	<h2><span class="label">Valor: </span>R$ ${imovel.valor}</h2>
 	
 	<div>
 		<div class="container" id="body">

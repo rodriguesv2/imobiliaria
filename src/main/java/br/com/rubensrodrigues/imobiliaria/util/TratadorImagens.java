@@ -30,6 +30,12 @@ public class TratadorImagens {
 		return uuid.toString()+extensao;
 	}
 	
+	public void salvarFotoCorretor(MultipartFile arquivo, String novoNome) throws IllegalStateException, IOException {
+		String realPath = request.getServletContext().getRealPath("arquivos-carregados");
+		File file = new File(realPath + "/" + novoNome);
+		
+		arquivo.transferTo(file);
+	}
 	
 	public void salvar(MultipartFile arquivo, String novoNome) throws IllegalStateException, IOException {
 		String realPath = request.getServletContext().getRealPath("arquivos-carregados");

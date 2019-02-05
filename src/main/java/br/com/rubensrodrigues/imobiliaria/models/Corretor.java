@@ -1,9 +1,11 @@
 package br.com.rubensrodrigues.imobiliaria.models;
 
 import java.math.BigInteger;
-import java.util.Calendar;
+import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,11 +20,11 @@ public class Corretor {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	@DateTimeFormat
-	private Calendar dataNascimento;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date dataNascimento;
 	private String cidade;
 	private String uf;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Foto foto;
 	private BigInteger telefone1;
 	private BigInteger telefone2;
@@ -40,10 +42,10 @@ public class Corretor {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Calendar getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(Calendar dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public String getCidade() {

@@ -29,6 +29,9 @@
 		        <li class="nav-item">
 		          <a class="nav-link" href="${s:mvcUrl('FC#listar').build()}">Lista de Fotos</a>
 		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="${s:mvcUrl('CC#form').build()}">Inserir Corretor</a>
+		        </li>
 		      </ul>
 		    </div>
 	  	</nav>
