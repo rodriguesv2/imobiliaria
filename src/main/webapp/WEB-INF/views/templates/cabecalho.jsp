@@ -26,7 +26,7 @@
 		        <li class="nav-item">
 		          <a class="nav-link" href="${s:mvcUrl('HC#index').build()}">Home <span class="sr-only">(current)</span></a>
 		        </li>
-		        <security:authorize access="hasRole('ROLE_CORRETOR')">
+		        <security:authorize access="hasAnyRole('ROLE_CORRETOR', 'ROLE_ADMIN')">
 			        <li class="nav-item">
 			          <a class="nav-link" href="${s:mvcUrl('IC#formImagem').build()}">Inserir Imovel</a>
 			        </li>

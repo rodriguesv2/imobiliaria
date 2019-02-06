@@ -31,7 +31,7 @@
 						<td>${corretor.email}</td>
 						<td><fmt:formatDate value="${corretor.dataNascimento}" pattern="dd/MM/yyyy"/></td>
 						<td>${corretor.listaPerfil()}</td>
-						<td><a href="#">Remover</a> <a href="#">Alterar</a></td>
+						<td><a href="#">Remover</a> <a href="/corretor/alterar/${corretor.id}">Alterar</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -24,6 +24,10 @@ public class CorretorDAO implements UserDetailsService{
 		manager.persist(corretor);
 	}
 	
+	public void alterar(Corretor corretor) {
+		manager.merge(corretor);
+	}
+	
 	public Corretor find(Integer id) {
 		return manager.find(Corretor.class, id);
 	}
@@ -32,6 +36,7 @@ public class CorretorDAO implements UserDetailsService{
 		return manager.createQuery("select c from Corretor c", Corretor.class).getResultList();
 	}
 
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
@@ -44,4 +49,5 @@ public class CorretorDAO implements UserDetailsService{
 		
 		return corretores.get(0);
 	}
+
 }

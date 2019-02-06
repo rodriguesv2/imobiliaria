@@ -1,70 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@ include file="/WEB-INF/views/templates/cabecalho.jsp"%>
 
-<h1>Novo Corretor</h1>
+<c:if test="${corretor == null}">
+	<h1>Novo Corretor</h1>
+</c:if>
+<c:if test="${corretor != null}">
+	<h1>Alterar Corretor</h1>
+</c:if>
+
 <br>
 
 <div>
 	<form action="${s:mvcUrl('CC#salvar').build()}" method="post" enctype="multipart/form-data">
 		<div>
 			<label>Nome: </label> 
-			<input type="text" name="nome">
+			<input type="text" name="nome" value="${corretor.nome}">
 		</div>
 		<div>
 			<label>Data de Nascimento: </label> 
 			<!-- <input type="text" name="dataNascimento" pattern="\d{1,2}/\d{1,2}/\d{4}"> -->
-			<input type="date" name="dataNascimento">
+			<input type="date" name="dataNascimento" value='<fmt:formatDate value="${corretor.dataNascimento}" pattern="yyyy-MM-dd"/>'>
 		</div>
 		<div>
 			<label>Cidade: </label> 
-			<input type="text" name="cidade">
+			<input type="text" name="cidade" value="${corretor.cidade}">
 		</div>
 		<div>
 			<label>UF: </label> 
 			<select name="uf">
-						<option value="AC">AC</option>
-						<option value="AL">AL</option>
-						<option value="AM">AM</option>
-						<option value="AP">AP</option>
-						<option value="BA">BA</option>
-						<option value="CE">CE</option>
-						<option value="DF">DF</option>
-						<option value="ES">ES</option>
-						<option value="GO">GO</option>
-						<option value="MA">MA</option>
-						<option value="MG">MG</option>
-						<option value="MS">MS</option>
-						<option value="MT">MT</option>
-						<option value="PA">PA</option>
-						<option value="PB">PB</option>
-						<option value="PE">PE</option>
-						<option value="PI">PI</option>
-						<option value="PR">PR</option>
-						<option value="RJ">RJ</option>
-						<option value="RN">RN</option>
-						<option value="RO">RO</option>
-						<option value="RR">RR</option>
-						<option value="RS">RS</option>
-						<option value="SC">SC</option>
-						<option value="SE">SE</option>
-						<option value="SP">SP</option>
-						<option value="TO">TO</option>
+				<c:forEach items="${listaUF}" var="uf">
+					<option value="${uf}"
+						<c:if test="${uf == corretor.uf}">
+							selected
+						</c:if>
+					>${uf}</option>
+				</c:forEach>
 			</select>
 		</div>
 		<div>
 			<label>Telefone Primario:</label>
-			<input type="tel" name="telefone1">
+			<input type="tel" name="telefone1" value="${corretor.telefone1}">
 		</div>
 		<div>
 			<label>Telefone Secundario:</label>
-			<input type="tel" name="telefone2">
+			<input type="tel" name="telefone2" value="${corretor.telefone2}">
 		</div>
 		<div>
 			<label>E-mail:</label>
-			<input type="email" name="email">
+			<input type="email" name="email" value="${corretor.email}">
 		</div>
 		<div>
 			<label>Foto:</label>
@@ -73,13 +60,15 @@
 		<div>
 			<label>Perfil:</label>
 			<select name="nomeRole">
-				<option value="ROLE_CORRETOR">Corretor</option>
-				<option value="ROLE_ADMIN">Admin</option>
+				<option value="ROLE_CORRETOR" <c:if test="${corretor.roles.get(0).nome == 'ROLE_CORRETOR'}">selected</c:if> >Corretor</option>
+				<option value="ROLE_ADMIN" <c:if test="${corretor.roles.get(0).nome == 'ROLE_ADMIN'}">selected</c:if> >Admin</option>
 			</select>
 		</div>
+		<input type="hidden" name="id" value="${corretor.id}">
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 		<button class="btn btn-primary" type="submit">Salvar</button>
 	</form>
 </div>
 
 <%@ include file="/WEB-INF/views/templates/rodape.jsp"%>
+
