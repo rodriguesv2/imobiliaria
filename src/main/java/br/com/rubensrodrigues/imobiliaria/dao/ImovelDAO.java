@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.rubensrodrigues.imobiliaria.models.Corretor;
 import br.com.rubensrodrigues.imobiliaria.models.Imovel;
 
 @Repository
@@ -27,5 +28,17 @@ public class ImovelDAO{
 	
 	public Imovel find(Integer id) {
 		return manager.find(Imovel.class, id);
+	}
+
+	public List<Imovel> listaPorCorretor(Corretor corretor) {
+		List<Imovel> imoveis = manager.createQuery("select i from Imovel i where corretor = :corretor", Imovel.class)
+				.setParameter("corretor", corretor)
+				.getResultList();
+		
+		return imoveis;
+	}
+	
+	public void alterar(Imovel imovel) {
+		manager.merge(imovel);
 	}
 }

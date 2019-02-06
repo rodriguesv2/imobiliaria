@@ -16,7 +16,7 @@
 			<footer id="imovel" class="page-footer font-small mdb-color pt-4 bg-secondary text-white">
 			
 			  <div class="container cidade-uf">
-			    <span>${imovel.cidade} - ${imovel.uf}</span>
+			    <span>${imovel.cidade} - ${imovel.uf}  -  Corretor: ${imovel.corretor.nome }</span>
 			  </div>
 			
 			  <!-- Footer Elements -->

@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+
+<c:url value="/imagens-sistema" var="imgSisPath"></c:url>
 
 <%@ include file="/WEB-INF/views/templates/cabecalho.jsp" %>
 
@@ -17,7 +20,7 @@
 					<th scope="col">Email</th>
 					<th scope="col">Data de Nascimento</th>
 					<th scope="col">Tipo Perfil</th>
-					<th scope="col"><th>
+					<th scope="col">Ações<th>
 				</tr>
 			</thead>
 			<tbody>
@@ -31,7 +34,13 @@
 						<td>${corretor.email}</td>
 						<td><fmt:formatDate value="${corretor.dataNascimento}" pattern="dd/MM/yyyy"/></td>
 						<td>${corretor.listaPerfil()}</td>
-						<td><a href="#">Remover</a> <a href="/corretor/alterar/${corretor.id}">Alterar</a></td>
+						<td>
+							<ul class="list-inline">
+								<li class="list-inline-item"><a href="/corretor/alterar/${corretor.id}"><img height="20px" width="20px" alt="Alterar" src="${imgSisPath}/glyphicons-edit.png"></a></li>
+								<li class="list-inline-item"><a href="/corretor/remover/${corretor.id}"><img height="20px" width="20px" alt="Remover" src="${imgSisPath}/glyphicons-trash.png"></a></li> 
+							</ul>
+							<a class="btn btn-success" href="/corretor/senha-padrao/${corretor.id}">Senha</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -39,3 +48,6 @@
 	</div>
 
 <%@ include file="/WEB-INF/views/templates/rodape.jsp" %>
+
+
+

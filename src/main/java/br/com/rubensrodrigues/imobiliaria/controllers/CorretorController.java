@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rubensrodrigues.imobiliaria.dao.CorretorDAO;
+import br.com.rubensrodrigues.imobiliaria.dao.ImovelDAO;
 import br.com.rubensrodrigues.imobiliaria.enumerated.UF;
 import br.com.rubensrodrigues.imobiliaria.models.Corretor;
 import br.com.rubensrodrigues.imobiliaria.models.Foto;
+import br.com.rubensrodrigues.imobiliaria.models.Imovel;
 import br.com.rubensrodrigues.imobiliaria.models.Role;
 import br.com.rubensrodrigues.imobiliaria.util.TratadorImagens;
 
@@ -27,7 +30,11 @@ public class CorretorController {
 	private CorretorDAO corretorDAO;
 	
 	@Autowired
+	private ImovelDAO imovelDAO;
+	
+	@Autowired
 	private TratadorImagens tratador;
+
 	
 	@RequestMapping("/formulario")
 	public ModelAndView form() {
@@ -68,6 +75,39 @@ public class CorretorController {
 		
 		return modelAndView;
 	}
+	
+	@RequestMapping("/senha-padrao/{id}")
+	public ModelAndView senhaPadrao(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/corretor/lista");
+		
+		Corretor corretor = corretorDAO.find(id);
+		corretor.setSenha("$2a$10$Am99vPgOrxymS3Dua6Nsa.f.jXqNP0Y48Jp539UaysbaK2pg77EdK");
+		
+		corretorDAO.alterar(corretor);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/remover/{id}")
+	public ModelAndView remover(@PathVariable("id") Integer id, Authentication usuario) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/corretor/lista");
+		
+		Corretor corretorLogado = (Corretor) usuario.getPrincipal();
+		
+		Corretor corretor = corretorDAO.find(id);
+		List<Imovel> imoveis = imovelDAO.listaPorCorretor(corretor);
+		
+		for (Imovel imovel : imoveis) {
+			imovel.setCorretor(corretorLogado);
+			imovelDAO.alterar(imovel);
+		}
+		
+		corretorDAO.remover(corretor);
+		
+		return modelAndView;
+	}
+	
+	
 	
 	
 	
