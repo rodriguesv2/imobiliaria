@@ -36,6 +36,11 @@
 			          <a class="nav-link" href="${s:mvcUrl('CC#form').build()}">Inserir Corretor</a>
 			        </li>
 		        </security:authorize>
+		        <security:authorize access="hasRole('ROLE_ADMIN')">
+			        <li class="nav-item">
+			          <a class="nav-link" href="${s:mvcUrl('CC#lista').build()}">Listar Corretores</a>
+			        </li>
+		        </security:authorize>
 		      </ul>
 		      
 		      <!-- Lado direiro do Navbar -->

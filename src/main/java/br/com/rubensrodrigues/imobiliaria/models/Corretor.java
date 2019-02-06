@@ -113,8 +113,19 @@ public class Corretor implements UserDetails{
 		this.roles = roles;
 	}
 	
-	
-	
+	public String listaPerfil() {
+		String perfis = "";
+		
+		for (int i = 0; i < roles.size(); i++) {
+			if(i == 0) {
+				perfis += roles.get(i).getNome().replace("ROLE_", "");
+			}else {
+				perfis = perfis + ", " + roles.get(i).getNome().replace("ROLE_", "");
+			}
+		}
+		
+		return perfis;
+	}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

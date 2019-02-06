@@ -6,6 +6,7 @@
 
 <link rel="stylesheet" href="${cssPath}/all.css">
 <link rel="stylesheet" href="${cssPath}/thumbnail.css">
+<script src="${jsPath}/thumbnail.js"></script>
 
 <div class="container" id="galeria">
 	<div class="row container">
@@ -54,6 +55,6 @@
 				</div>
 			</div>
 		</div>
-		<script src="${jsPath}/thumbnail.js"></script>
+		
 	</div>
 </div>

@@ -27,10 +27,13 @@ public class CorretorDAO implements UserDetailsService{
 	public Corretor find(Integer id) {
 		return manager.find(Corretor.class, id);
 	}
+	
+	public List<Corretor> lista(){
+		return manager.createQuery("select c from Corretor c", Corretor.class).getResultList();
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("********************"+ username +"**********************");
 		
 		List<Corretor> corretores = manager.createQuery("select c from Corretor c where c.email = :email", Corretor.class)
 				.setParameter("email", username)

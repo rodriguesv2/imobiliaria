@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/resources/js/**").permitAll()
 			.antMatchers("/arquivos-carregados/**").permitAll()
 			.antMatchers("/imovel/detalhe/**").permitAll()
+			//.antMatchers("/corretor/lista").permitAll()
 			.antMatchers("/corretor/**").hasAnyRole("ADMIN")
 			.antMatchers("/imovel/**").hasAnyRole("CORRETOR", "ADMIN")
 			.antMatchers("/").permitAll()
