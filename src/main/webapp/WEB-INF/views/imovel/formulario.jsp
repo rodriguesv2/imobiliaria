@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
+
 <c:url value="/resources/js" var="jsPath"/>
 
 <%@ include file="/WEB-INF/views/templates/cabecalho.jsp" %>
@@ -52,10 +54,26 @@
 						</c:forEach>
 					</select>
 				</div>
+				<div>
+					<label>Situação</label>
+					<select name="estado">
+						<c:forEach items="${estadoImovel}" var="estado">
+							<option value="${estado}">${estado}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div>
+					<label>Tipo de Negócio</label>
+					<select name="negocio">
+						<c:forEach items="${tipoNegocio}" var="tipo">
+							<option value="${tipo}">${tipo}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<input type="hidden" name="idCorretor" value='<security:authentication property="principal.id"/>'/>
 				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 				<button type="submit">Enviar</button>
 			</form>
-		</div>
 		<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 		<script src="${jsPath}/cep.js"></script>
 

@@ -23,6 +23,10 @@ public class CorretorDAO implements UserDetailsService{
 	public void salvar(Corretor corretor) {
 		manager.persist(corretor);
 	}
+	
+	public Corretor find(Integer id) {
+		return manager.find(Corretor.class, id);
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

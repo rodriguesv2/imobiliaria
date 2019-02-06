@@ -11,13 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.rubensrodrigues.imobiliaria.dao.CorretorDAO;
 import br.com.rubensrodrigues.imobiliaria.dao.ImovelDAO;
+import br.com.rubensrodrigues.imobiliaria.models.Corretor;
+import br.com.rubensrodrigues.imobiliaria.models.EstadoImovel;
 import br.com.rubensrodrigues.imobiliaria.models.Foto;
 import br.com.rubensrodrigues.imobiliaria.models.Imovel;
 import br.com.rubensrodrigues.imobiliaria.models.TipoImovel;
+import br.com.rubensrodrigues.imobiliaria.models.TipoNegocio;
 import br.com.rubensrodrigues.imobiliaria.util.TratadorImagens;
 
 @Controller
@@ -26,6 +31,9 @@ public class ImovelController {
 	
 	@Autowired
 	private ImovelDAO imovelDAO;
+	
+	@Autowired
+	private CorretorDAO corretorDAO;
 	
 	@Autowired
 	private HttpServletRequest request;//Parametro usado para usar a sessão para "carregar" o imovel pelos formulários e salvar após o carregamento das fotos
@@ -37,6 +45,9 @@ public class ImovelController {
 	public ModelAndView formImagem() {
 		ModelAndView modelAndView = new ModelAndView("imovel/formulario");
 		modelAndView.addObject("tipoImovel", TipoImovel.values());
+		modelAndView.addObject("estadoImovel", EstadoImovel.values());
+		modelAndView.addObject("tipoNegocio", TipoNegocio.values());
+		
 		return modelAndView;
 	}
 	
@@ -44,8 +55,13 @@ public class ImovelController {
 	*e principalmente, aguarda as fotos para persistir.
 	*/
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
-	public ModelAndView salvarImovel(Imovel imovel) {
+	public ModelAndView salvarImovel(Imovel imovel, @RequestParam String idCorretor) {
 		ModelAndView modelAndView = new ModelAndView("imovel/inserirImagem");
+		
+		String semVigula = idCorretor.replace(",", "");
+		
+		Corretor corretor = corretorDAO.find(Integer.parseInt(semVigula));
+		imovel.setCorretor(corretor);
 		request.getSession().setAttribute("imovel", imovel);
 		
 		return modelAndView;

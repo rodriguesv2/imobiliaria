@@ -47,6 +47,10 @@ public class Imovel {
 	@Enumerated(EnumType.STRING)
 	private TipoImovel tipo;
 	private Double valor;
+	@Enumerated(EnumType.STRING)
+	private EstadoImovel estado;
+	@Enumerated(EnumType.STRING)
+	private TipoNegocio negocio;
 	
 	public Integer getId() {
 		return id;
@@ -144,7 +148,18 @@ public class Imovel {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	
+	public EstadoImovel getEstado() {
+		return estado;
+	}
+	public void setEstado(EstadoImovel estado) {
+		this.estado = estado;
+	}
+	public TipoNegocio getNegocio() {
+		return negocio;
+	}
+	public void setNegocio(TipoNegocio negocio) {
+		this.negocio = negocio;
+	}
 	/**
 	 * Usado para listar exemplares de no maximo 6 fotos para a apresentação na home.
 	 * @return Uma sub lista com 6 imagens. Caso o imovel tenha menos de 6 fotos, o metodo trará todas sem filtrar quantidade. Porem se o imóvel não tiver fotos, o retorno será uma lista vazia
