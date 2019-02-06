@@ -1,4 +1,4 @@
-package br.com.rubensrodrigues.imobiliaria.models;
+package br.com.rubensrodrigues.imobiliaria.enumerated;
 
 public enum EstadoImovel {
 	ATIVO, INATIVO, NEGOCIANDO, VENDIDO, ALUGADO;

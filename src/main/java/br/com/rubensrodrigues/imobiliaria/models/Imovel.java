@@ -20,6 +20,10 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import br.com.rubensrodrigues.imobiliaria.enumerated.EstadoImovel;
+import br.com.rubensrodrigues.imobiliaria.enumerated.TipoImovel;
+import br.com.rubensrodrigues.imobiliaria.enumerated.TipoNegocio;
+
 @Entity
 public class Imovel {
 

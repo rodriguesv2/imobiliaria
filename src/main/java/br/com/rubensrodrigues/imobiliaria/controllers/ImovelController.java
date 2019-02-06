@@ -17,12 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rubensrodrigues.imobiliaria.dao.CorretorDAO;
 import br.com.rubensrodrigues.imobiliaria.dao.ImovelDAO;
+import br.com.rubensrodrigues.imobiliaria.enumerated.EstadoImovel;
+import br.com.rubensrodrigues.imobiliaria.enumerated.TipoImovel;
+import br.com.rubensrodrigues.imobiliaria.enumerated.TipoNegocio;
 import br.com.rubensrodrigues.imobiliaria.models.Corretor;
-import br.com.rubensrodrigues.imobiliaria.models.EstadoImovel;
 import br.com.rubensrodrigues.imobiliaria.models.Foto;
 import br.com.rubensrodrigues.imobiliaria.models.Imovel;
-import br.com.rubensrodrigues.imobiliaria.models.TipoImovel;
-import br.com.rubensrodrigues.imobiliaria.models.TipoNegocio;
 import br.com.rubensrodrigues.imobiliaria.util.TratadorImagens;
 
 @Controller
