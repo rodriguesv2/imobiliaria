@@ -41,4 +41,8 @@ public class ImovelDAO{
 	public void alterar(Imovel imovel) {
 		manager.merge(imovel);
 	}
+	
+	public void remover(Imovel imovel) {
+		manager.remove(imovel);
+	}
 }

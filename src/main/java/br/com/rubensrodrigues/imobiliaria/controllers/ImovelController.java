@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +43,7 @@ public class ImovelController {
 	private TratadorImagens tratador; //Classe util para manipulação das imagens carregadas pelo formulario.
 	
 	@RequestMapping("/formulario")
-	public ModelAndView formImagem() {
+	public ModelAndView formImovel() {
 		ModelAndView modelAndView = new ModelAndView("imovel/formulario");
 		modelAndView.addObject("tipoImovel", TipoImovel.values());
 		modelAndView.addObject("estadoImovel", EstadoImovel.values());
@@ -100,6 +101,28 @@ public class ImovelController {
 		ModelAndView modelAndView = new ModelAndView("imovel/detalhe");
 		
 		modelAndView.addObject("imovel", imovelDAO.find(id));
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/lista-do-corretor")
+	public ModelAndView listaPorCorretor(Authentication usuario) {
+		ModelAndView modelAndView = new ModelAndView("imovel/lista-por-corretor");
+		
+		Corretor corretor = (Corretor) usuario.getPrincipal();
+		List<Imovel> imoveis = imovelDAO.listaPorCorretor(corretor);
+		
+		modelAndView.addObject("imoveis", imoveis);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/remover-por-corretor/{id}")
+	public ModelAndView remover(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/imovel/lista-do-corretor");
+		
+		Imovel imovel = imovelDAO.find(id);
+		imovelDAO.remover(imovel);
 		
 		return modelAndView;
 	}
