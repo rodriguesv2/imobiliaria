@@ -10,7 +10,8 @@
 		<meta charset="UTF-8">
 		<title>Imobiliaria</title>
 		<c:url value="/resources/css" var="cssPath"/>
-		<link rel="stylesheet" href="${cssPath}/bootstrap.min.css">
+		<c:url value="/resources/js" var="jsPath"/>
+		<link rel="stylesheet" href="${cssPath}/bootstrap.css">
 		<link rel="stylesheet" href="${cssPath}/estilos.css">
 	</head>
 	<body>
@@ -46,9 +47,15 @@
 		      <!-- Lado direiro do Navbar -->
 		      <div class="navbar-collapse collapse order-3">
 			      <ul class="navbar-nav ml-auto">
-			      	<li class="nav-item">
+			      	<li class="nav-item dropdown">
 			      		<security:authorize access="isAuthenticated()">
-			      			<span class="navbar-brand"><security:authentication property="principal.nome"/></span>
+			      			<a href="#" class="navbar-brand dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			      				<security:authentication property="principal.nome"/>
+			      			</a>
+			      			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+			      				<a class="dropdown-item" href="#">Editar Perfil</a>
+			      				<a class="dropdown-item" href="#">Mudar Senha</a>
+			      			</div>
 			      		</security:authorize>
 			      	</li>
 			      	<li class="nav-item">
@@ -63,6 +70,8 @@
 		      </div>
 		    </div>
 	  	</nav>
+	  	<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+	  	<script src="${jsPath}/bootstrap.bundle.js"></script>
 	  <div id="body" class="container">
 	  
 	  
