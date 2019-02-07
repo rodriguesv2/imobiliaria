@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 
 <%@ include file="/WEB-INF/views/templates/cabecalho.jsp"%>
 
@@ -57,13 +58,18 @@
 			<label>Foto:</label>
 			<input type="file" name="arquivo" accept=".png,.jpg">
 		</div>
-		<div>
-			<label>Perfil:</label>
-			<select name="nomeRole">
-				<option value="ROLE_CORRETOR" <c:if test="${corretor.roles.get(0).nome == 'ROLE_CORRETOR'}">selected</c:if> >Corretor</option>
-				<option value="ROLE_ADMIN" <c:if test="${corretor.roles.get(0).nome == 'ROLE_ADMIN'}">selected</c:if> >Admin</option>
-			</select>
-		</div>
+		<security:authorize access="hasRole('ROLE_ADMIN')">
+			<div>
+				<label>Perfil:</label>
+				<select name="nomeRole">
+					<option value="ROLE_CORRETOR" <c:if test="${corretor.roles.get(0).nome == 'ROLE_CORRETOR'}">selected</c:if> >Corretor</option>
+					<option value="ROLE_ADMIN" <c:if test="${corretor.roles.get(0).nome == 'ROLE_ADMIN'}">selected</c:if> >Admin</option>
+				</select>
+			</div>
+		</security:authorize>
+		<security:authorize access="hasRole('ROLE_CORRETOR')">
+			<input type="hidden" name="nomeRole" value="ROLE_CORRETOR">
+		</security:authorize>
 		<input type="hidden" name="id" value="${corretor.id}">
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 		<button class="btn btn-primary" type="submit">Salvar</button>

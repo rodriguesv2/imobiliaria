@@ -12,8 +12,8 @@
 <c:forEach items="${imoveis}" var="imovel">
 	<a id="link-imovel" href="${s:mvcUrl('IC#detalhe').arg(0, imovel.id).build()}">
 	<!-- Footer -->
-		<div>
-			<footer id="imovel" class="page-footer font-small mdb-color pt-4 bg-secondary text-white">
+		<div class="rounded">
+			<footer id="imovel" class="page-footer font-small mdb-color pt-4 bg-secondary text-white rounded border border-dark">
 			
 			  <div class="container cidade-uf">
 			    <span>${imovel.cidade} - ${imovel.uf}  -  Corretor: ${imovel.corretor.nome }</span>

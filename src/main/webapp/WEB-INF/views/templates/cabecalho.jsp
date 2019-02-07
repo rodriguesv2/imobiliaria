@@ -53,8 +53,8 @@
 			      				<security:authentication property="principal.nome"/>
 			      			</a>
 			      			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-			      				<a class="dropdown-item" href="#">Editar Perfil</a>
-			      				<a class="dropdown-item" href="#">Mudar Senha</a>
+			      				<a class="dropdown-item" href="/corretor/alterar-perfil">Editar Perfil</a>
+			      				<a class="dropdown-item" href="/corretor/alterar-senha">Mudar Senha</a>
 			      			</div>
 			      		</security:authorize>
 			      	</li>
