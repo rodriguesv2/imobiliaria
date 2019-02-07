@@ -92,6 +92,13 @@ public class TratadorImagens {
         g.drawImage(imagem, 0, 0, largura, altura, null);
         ImageIO.write(novaImagem, "JPG", arquivo);
 	}
+	
+	public boolean removerFoto(String foto) {
+		String realPath = request.getServletContext().getRealPath("arquivos-carregados");
+		File file = new File(realPath + "/" + foto);
+		
+		return file.delete();
+	}
 }
 
 

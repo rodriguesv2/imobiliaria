@@ -121,10 +121,19 @@ public class ImovelController {
 	public ModelAndView remover(@PathVariable("id") Integer id) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/imovel/lista-do-corretor");
 		
-		Imovel imovel = imovelDAO.find(id);
-		imovelDAO.remover(imovel);
+		removerGenerico(id);
 		
 		return modelAndView;
+	}
+	
+	private void removerGenerico(Integer id) {
+		Imovel imovel = imovelDAO.find(id);
+		
+		for (Foto foto : imovel.getFotos()) {
+			tratador.removerFoto(foto.getNomeArquivo());
+		}
+		
+		imovelDAO.remover(imovel);
 	}
 }
 
