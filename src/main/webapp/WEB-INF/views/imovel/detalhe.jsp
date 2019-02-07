@@ -23,9 +23,8 @@
 		</div>
 		<div class="container" id="body">
 			<h2>Fotos</h2>
-			<script src="${jsPath}/bootstrap.min.js"></script>
-			<script src="${jsPath}/jquery.min.js"></script>
-			<%@ include file="/WEB-INF/views/templates/galeria_imagens.jsp" %>
+			
+			<%@ include file="/WEB-INF/views/templates/nova-galeria-imagens.jsp" %>
 			
 		</div>
 	</div>
