@@ -10,7 +10,24 @@
 			<h1>Imobiliaria</h1> 
 	
 	<!-- Começo da paginação superior -->		
-	<nav aria-label="Navegação da Home">
+	<nav aria-label="Navegação da Home" style="display: inline:block;">
+		<ul class="pagination justify-content-end">
+			<li>
+				<form action="/paginacao" method="post">				
+					<label>Imóveis por Página: </label>
+					<select name="quantItens" onchange="this.form.submit()">
+						<option value="5" <c:if test="${pageImovel.numberOfElements == 5}">selected</c:if> >5</option>
+						<option value="10" <c:if test="${pageImovel.numberOfElements == 10}">selected</c:if> >10</option>
+						<option value="15" <c:if test="${pageImovel.numberOfElements == 15}">selected</c:if> >15</option>
+						<option value="20" <c:if test="${pageImovel.numberOfElements == 20}">selected</c:if> >20</option>
+						<option value="25" <c:if test="${pageImovel.numberOfElements == 25}">selected</c:if> >25</option>
+						<option value="30" <c:if test="${pageImovel.numberOfElements == 30}">selected</c:if> >30</option>
+					</select> 
+					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+				</form>
+			</li>
+		</ul>
+		
 		<ul class="pagination justify-content-center">
 		
 			<li class="page-item <c:if test="${pageImovel.isFirst()}">disabled</c:if>">
@@ -21,9 +38,6 @@
 				<a class="page-link" href="
 					<c:if test="${!pageImovel.isFirst()}">
 						?pagina=${pageImovel.number}
-					</c:if>
-					<c:if test="${pageImovel.isFirst()}">
-						#
 					</c:if>
 				">
 					<c:if test="${!pageImovel.isFirst()}">
@@ -46,9 +60,6 @@
 					<c:if test="${!pageImovel.isLast()}">
 						?pagina=${pageImovel.number + 2}
 					</c:if>
-					<c:if test="${pageImovel.isLast()}">
-						#
-					</c:if>
 				">
 					<c:if test="${!pageImovel.isLast()}">
 						${pageImovel.number + 2}
@@ -59,11 +70,12 @@
 				</a>
 			</li>
 			
-			<li class="page-item <c:if test="${pageImovel.isLast()}">disabled</c:if>">
+			<li class="page-item<c:if test="${pageImovel.isLast()}">disabled</c:if>">
 				<a class="page-link" href="?pagina=${pageImovel.getTotalPages()}">Ultimo</a>
 			</li>
 			
 		</ul>
+		
 	</nav>
 	<!-- Fim da paginação superior -->	
 		
@@ -126,9 +138,6 @@
 					<c:if test="${!pageImovel.isFirst()}">
 						?pagina=${pageImovel.number}
 					</c:if>
-					<c:if test="${pageImovel.isFirst()}">
-						#
-					</c:if>
 				">
 					<c:if test="${!pageImovel.isFirst()}">
 						${pageImovel.number}
@@ -140,7 +149,7 @@
 			</li>
 			
 			<li class="page-item active">
-				<a class="page-link" href="#">${pageImovel.number + 1}
+				<a class="page-link" href="">${pageImovel.number + 1}
 						<span class="sr-only">(atual)</span>
 				</a>
 			</li>
@@ -149,9 +158,6 @@
 				<a class="page-link" href="
 					<c:if test="${!pageImovel.isLast()}">
 						?pagina=${pageImovel.number + 2}
-					</c:if>
-					<c:if test="${pageImovel.isLast()}">
-						#
 					</c:if>
 				">
 					<c:if test="${!pageImovel.isLast()}">

@@ -1,6 +1,6 @@
 package br.com.rubensrodrigues.imobiliaria.controllers;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.rubensrodrigues.imobiliaria.dao.ImovelDAO;
 import br.com.rubensrodrigues.imobiliaria.jpa_repository.ImovelRepository;
 import br.com.rubensrodrigues.imobiliaria.models.Imovel;
 
@@ -19,30 +18,32 @@ import br.com.rubensrodrigues.imobiliaria.models.Imovel;
 public class HomeController{
 	
 	@Autowired
-	private ImovelDAO imovelDAO;
-	
-	@Autowired
 	private ImovelRepository imovelRepo;
 	
-	@RequestMapping("/teste")
-	public ModelAndView index(){
-		ModelAndView modelAndView = new ModelAndView("home/index");
+	@Autowired
+	private HttpServletRequest request;
+	
+	@RequestMapping("/paginacao")
+	public ModelAndView paginacao(@RequestParam(defaultValue = "5") Integer quantItens){
+		ModelAndView modelAndView = new ModelAndView("redirect:/");
 		
-		List<Imovel> imoveis = imovelDAO.lista();
-		modelAndView.addObject("imoveis", imoveis);
-
+		request.getSession().setAttribute("porPagina", quantItens);
+		
 		return modelAndView;
 	}
 	
 	@RequestMapping("/")
 	public ModelAndView home(
 			@RequestParam(defaultValue = "1") Integer pagina, 
-			@RequestParam(defaultValue = "7") Integer porPagina,
 			@RequestParam(defaultValue = "cidade") String ordenacao,
 			@RequestParam(defaultValue = "ASC") Sort.Direction direcao) {
 		ModelAndView modelAndView = new ModelAndView("home/home");
 		
-		//modelAndView.addObject("paginaAtual", pagina);
+		Integer porPagina = (Integer) request.getSession().getAttribute("porPagina");
+		
+		if(porPagina == null) {
+			porPagina = 5;
+		}
 		
 		Page<Imovel> pageImovel = imovelRepo.findAll(new PageRequest(--pagina, porPagina));
 		modelAndView.addObject("pageImovel", pageImovel);
