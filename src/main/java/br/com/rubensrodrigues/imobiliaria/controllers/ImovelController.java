@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import br.com.rubensrodrigues.imobiliaria.dao.ImovelDAO;
 import br.com.rubensrodrigues.imobiliaria.enumerated.EstadoImovel;
 import br.com.rubensrodrigues.imobiliaria.enumerated.TipoImovel;
 import br.com.rubensrodrigues.imobiliaria.enumerated.TipoNegocio;
+import br.com.rubensrodrigues.imobiliaria.jpa_repository.ImovelRepository;
 import br.com.rubensrodrigues.imobiliaria.models.Corretor;
 import br.com.rubensrodrigues.imobiliaria.models.Foto;
 import br.com.rubensrodrigues.imobiliaria.models.Imovel;
@@ -32,6 +34,9 @@ public class ImovelController {
 	
 	@Autowired
 	private ImovelDAO imovelDAO;
+	
+	@Autowired
+	private ImovelRepository imovelRepo;
 	
 	@Autowired
 	private CorretorDAO corretorDAO;
@@ -117,9 +122,27 @@ public class ImovelController {
 		return modelAndView;
 	}
 	
+	@RequestMapping("/lista")
+	public ModelAndView listaGeral(Pageable pageable) {
+		ModelAndView modelAndView = new ModelAndView("imovel/lista");
+		
+		imovelRepo.findAll(pageable);
+		
+		return modelAndView;
+	}
+	
 	@RequestMapping("/remover-por-corretor/{id}")
-	public ModelAndView remover(@PathVariable("id") Integer id) {
+	public ModelAndView removerPorCorretor(@PathVariable("id") Integer id) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/imovel/lista-do-corretor");
+		
+		removerGenerico(id);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/remover/{id}")
+	public ModelAndView remover(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/imovel/lista");
 		
 		removerGenerico(id);
 		
