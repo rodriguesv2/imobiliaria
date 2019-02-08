@@ -29,12 +29,17 @@
 		        </li>
 		        <security:authorize access="hasAnyRole('ROLE_CORRETOR', 'ROLE_ADMIN')">
 			        <li class="nav-item">
-			          <a class="nav-link" href="${s:mvcUrl('IC#formImovel').build()}">Inserir Imovel</a>
+			          <a class="nav-link" href="${s:mvcUrl('IC#formImovel').build()}">Inserir Imóvel</a>
 			        </li>
 		        </security:authorize>
 		        <security:authorize access="hasAnyRole('ROLE_CORRETOR', 'ROLE_ADMIN')">
 			        <li class="nav-item">
-			          <a class="nav-link" href="${s:mvcUrl('IC#listaPorCorretor').build()}">Meus imoveis</a>
+			          <a class="nav-link" href="${s:mvcUrl('IC#listaPorCorretor').build()}">Meus imóveis</a>
+			        </li>
+		        </security:authorize>
+		        <security:authorize access="hasRole('ROLE_ADMIN')">
+			        <li class="nav-item">
+			          <a class="nav-link" href="${s:mvcUrl('IC#listaGeral').build()}">Lista de Imóveis</a>
 			        </li>
 		        </security:authorize>
 		        <security:authorize access="hasRole('ROLE_ADMIN')">

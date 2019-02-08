@@ -8,12 +8,11 @@
 
 <%@ include file="/WEB-INF/views/templates/cabecalho.jsp" %>
 
-
 <!-- Começo da paginação superior -->		
 	<nav aria-label="Navegação da Home" style="display: inline:block;">
 		<ul class="pagination justify-content-end">
 			<li>
-				<form action="/imovel/lista-do-corretor/paginacao" method="post">				
+				<form action="/imovel/lista/paginacao" method="post">				
 					<label>Imóveis por Página: </label>
 					<select name="quantItens" onchange="this.form.submit()">
 						<option value="5" <c:if test="${porPaginaTabela == 5}">selected</c:if> >5</option>
@@ -81,7 +80,6 @@
 	</nav>
 	<!-- Fim da paginação superior -->	
 
-
 	<div>
 		<table class="table table-striped">
 			<thead class="thead-dark">
@@ -89,12 +87,12 @@
 					<th scope="col">Referência</th>
 					<th scope="col">Endereço</th>
 					<th scope="col">Cidade</th>
-					<th scope="col">Data de Criação</th>
 					<th scope="col">Ultima Modificação</th>
 					<th scope="col">Tipo</th>
 					<th scope="col">Situação</th>
 					<th scope="col">Negócio</th>
 					<th scope="col">Valor</th>
+					<th scope="col">Corretor</th>
 					<th scope="col">Ações<th>
 				</tr>
 			</thead>
@@ -104,16 +102,16 @@
 						<td>${imovel.referencia}</td>
 						<td>${imovel.endereco}, ${imovel.numero}</td>
 						<td>${imovel.cidade} - ${imovel.uf}</td>
-						<td><fmt:formatDate value="${imovel.dataCriacao.time}" pattern="dd/MM/yyyy HH:mm"/></td>
 						<td><fmt:formatDate value="${imovel.dataModificacao.time}" pattern="dd/MM/yyyy HH:mm"/></td>
 						<td>${imovel.tipo}</td>
 						<td>${imovel.estado}</td>
 						<td>${imovel.negocio}</td>
 						<td>R$ ${imovel.valor}</td>
+						<td>${imovel.corretor.nome}</td>
 						<td>
 							<ul class="list-inline">
 								<li class="list-inline-item"><a href="#"><img height="20px" width="20px" alt="Alterar" src="${imgSisPath}/glyphicons-edit.png"></a></li>
-								<li class="list-inline-item"><a href="/imovel/remover-por-corretor/${imovel.id}"><img height="20px" width="20px" alt="Remover" src="${imgSisPath}/glyphicons-trash.png"></a></li> 
+								<li class="list-inline-item"><a href="/imovel/remover/${imovel.id}"><img height="20px" width="20px" alt="Remover" src="${imgSisPath}/glyphicons-trash.png"></a></li> 
 							</ul>
 							<a class="btn btn-success" href="/imovel/detalhe/${imovel.id}">Detalhe</a>
 						</td>
@@ -122,7 +120,7 @@
 			</tbody>
 		</table>
 	</div>
-
+	
 	<!-- Começo da paginação inferior -->
 	<nav aria-label="Navegação da Home">
 		<ul class="pagination justify-content-center">

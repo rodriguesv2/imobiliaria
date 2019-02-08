@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/corretor/alterar-senha", "/corretor/nova-senha").hasAnyRole("CORRETOR", "ADMIN")
 			.antMatchers("/corretor/**").hasAnyRole("ADMIN")
 			.antMatchers("/imovel/**").hasAnyRole("CORRETOR", "ADMIN")
+			.antMatchers("/imovel/lista", "/imovel/lista/paginacao").hasRole("ADMIN")
 			.antMatchers("/").permitAll()
 			.anyRequest().authenticated()
 			.and()

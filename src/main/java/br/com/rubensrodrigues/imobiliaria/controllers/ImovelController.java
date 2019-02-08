@@ -7,7 +7,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -110,26 +112,80 @@ public class ImovelController {
 		return modelAndView;
 	}
 	
+	
+	
+	
+	
+	@RequestMapping(value = "/lista-do-corretor/paginacao", method = RequestMethod.POST)
+	public ModelAndView paginacaoPorCorretor(@RequestParam(defaultValue = "15") Integer quantItens){
+		ModelAndView modelAndView = new ModelAndView("redirect:/imovel/lista");
+		
+		request.getSession().setAttribute("porPaginaTabela", quantItens);
+		
+		return modelAndView;
+	}
+	
 	@RequestMapping("/lista-do-corretor")
-	public ModelAndView listaPorCorretor(Authentication usuario) {
+	public ModelAndView listaPorCorretor(
+			@RequestParam(defaultValue = "1") Integer pagina, 
+			@RequestParam(defaultValue = "cidade") String ordenacao,
+			@RequestParam(defaultValue = "ASC") Sort.Direction direcao,
+			Authentication usuario) {
 		ModelAndView modelAndView = new ModelAndView("imovel/lista-por-corretor");
 		
-		Corretor corretor = (Corretor) usuario.getPrincipal();
-		List<Imovel> imoveis = imovelDAO.listaPorCorretor(corretor);
+		Integer porPaginaTabela = (Integer) request.getSession().getAttribute("porPaginaTabela");
 		
-		modelAndView.addObject("imoveis", imoveis);
+		if(porPaginaTabela == null) {
+			porPaginaTabela = 10;
+		}
+		
+		Corretor corretor = (Corretor) usuario.getPrincipal();
+		//List<Imovel> imoveis = imovelDAO.listaPorCorretor(corretor);
+		Page<Imovel> pageImovel = imovelRepo.findByCorretor(corretor, new PageRequest(--pagina, porPaginaTabela));
+		
+		
+		modelAndView.addObject("pageImovel", pageImovel);
+		
+		return modelAndView;
+	}
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/lista/paginacao", method = RequestMethod.POST)
+	public ModelAndView paginacao(@RequestParam(defaultValue = "15") Integer quantItens){
+		ModelAndView modelAndView = new ModelAndView("redirect:/imovel/lista");
+		
+		request.getSession().setAttribute("porPaginaTabela", quantItens);
 		
 		return modelAndView;
 	}
 	
 	@RequestMapping("/lista")
-	public ModelAndView listaGeral(Pageable pageable) {
+	public ModelAndView listaGeral(
+			@RequestParam(defaultValue = "1") Integer pagina, 
+			@RequestParam(defaultValue = "cidade") String ordenacao,
+			@RequestParam(defaultValue = "ASC") Sort.Direction direcao) {
 		ModelAndView modelAndView = new ModelAndView("imovel/lista");
 		
-		imovelRepo.findAll(pageable);
+		Integer porPaginaTabela = (Integer) request.getSession().getAttribute("porPaginaTabela");
+		
+		if(porPaginaTabela == null) {
+			porPaginaTabela = 10;
+		}
+		
+		Page<Imovel> pageImovel = imovelRepo.findAll(new PageRequest(--pagina, porPaginaTabela));
+		modelAndView.addObject("pageImovel", pageImovel);
 		
 		return modelAndView;
 	}
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping("/remover-por-corretor/{id}")
 	public ModelAndView removerPorCorretor(@PathVariable("id") Integer id) {

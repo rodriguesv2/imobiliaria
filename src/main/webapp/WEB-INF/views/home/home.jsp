@@ -16,12 +16,12 @@
 				<form action="/paginacao" method="post">				
 					<label>Imóveis por Página: </label>
 					<select name="quantItens" onchange="this.form.submit()">
-						<option value="5" <c:if test="${pageImovel.numberOfElements == 5}">selected</c:if> >5</option>
-						<option value="10" <c:if test="${pageImovel.numberOfElements == 10}">selected</c:if> >10</option>
-						<option value="15" <c:if test="${pageImovel.numberOfElements == 15}">selected</c:if> >15</option>
-						<option value="20" <c:if test="${pageImovel.numberOfElements == 20}">selected</c:if> >20</option>
-						<option value="25" <c:if test="${pageImovel.numberOfElements == 25}">selected</c:if> >25</option>
-						<option value="30" <c:if test="${pageImovel.numberOfElements == 30}">selected</c:if> >30</option>
+						<option value="5" <c:if test="${porPagina == 5}">selected</c:if> >5</option>
+						<option value="10" <c:if test="${porPagina == 10}">selected</c:if> >10</option>
+						<option value="15" <c:if test="${porPagina == 15}">selected</c:if> >15</option>
+						<option value="20" <c:if test="${porPagina == 20}">selected</c:if> >20</option>
+						<option value="25" <c:if test="${porPagina == 25}">selected</c:if> >25</option>
+						<option value="30" <c:if test="${porPagina == 30}">selected</c:if> >30</option>
 					</select> 
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 				</form>
