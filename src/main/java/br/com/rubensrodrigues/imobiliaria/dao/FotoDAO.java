@@ -25,4 +25,12 @@ public class FotoDAO {
 		String query = "select f from Foto f";
 		return manager.createQuery(query, Foto.class).getResultList();
 	}
+	
+	public void remover(Foto foto) {
+		manager.remove(foto);
+	}
+	
+	public Foto find(Integer id) {
+		return manager.find(Foto.class, id);
+	}
 }

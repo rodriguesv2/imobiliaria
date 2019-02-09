@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.rubensrodrigues.imobiliaria.dao.CorretorDAO;
+import br.com.rubensrodrigues.imobiliaria.dao.FotoDAO;
 import br.com.rubensrodrigues.imobiliaria.dao.ImovelDAO;
 import br.com.rubensrodrigues.imobiliaria.enumerated.EstadoImovel;
 import br.com.rubensrodrigues.imobiliaria.enumerated.TipoImovel;
@@ -42,6 +43,9 @@ public class ImovelController {
 	
 	@Autowired
 	private CorretorDAO corretorDAO;
+	
+	@Autowired
+	private FotoDAO fotoDAO;
 	
 	@Autowired
 	private HttpServletRequest request;//Parametro usado para usar a sessão para "carregar" o imovel pelos formulários e salvar após o carregamento das fotos
@@ -137,6 +141,7 @@ public class ImovelController {
 		
 		if(porPaginaTabela == null) {
 			porPaginaTabela = 10;
+			request.getSession().setAttribute("porPaginaTabela", 10);
 		}
 		
 		Corretor corretor = (Corretor) usuario.getPrincipal();
@@ -173,6 +178,7 @@ public class ImovelController {
 		
 		if(porPaginaTabela == null) {
 			porPaginaTabela = 10;
+			request.getSession().setAttribute("porPaginaTabela", 10);
 		}
 		
 		Page<Imovel> pageImovel = imovelRepo.findAll(new PageRequest(--pagina, porPaginaTabela));
@@ -213,6 +219,67 @@ public class ImovelController {
 		}
 		
 		imovelDAO.remover(imovel);
+	}
+	
+	
+	
+	
+	
+	
+	@RequestMapping("/alterar-por-corretor/{id}")
+	public ModelAndView formularioAlterarPorCorretor(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView("imovel/formulario-alterar");
+		
+		modelAndView.addObject("tipoImovel", TipoImovel.values());
+		modelAndView.addObject("estadoImovel", EstadoImovel.values());
+		modelAndView.addObject("tipoNegocio", TipoNegocio.values());
+		
+		Imovel imovel = imovelDAO.find(id);
+		modelAndView.addObject("imovel", imovel);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/salvar-alteracao")
+	public ModelAndView alteraImovel(Imovel imovel, @RequestParam String idCorretor) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/imovel/lista-do-corretor");
+		
+		Corretor corretor = corretorDAO.find(Integer.parseInt(idCorretor.replace(",", "")));
+		Imovel imovelPersistido = imovelDAO.find(imovel.getId());
+		
+		imovel.setFotos(imovelPersistido.getFotos());
+		imovel.setCorretor(corretor);
+		imovel.setDataCriacao(imovelPersistido.getDataCriacao());
+		
+		imovelDAO.alterar(imovel);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/gerenciar-fotos-por-corretor")
+	public ModelAndView gerenciarFotosPorCorretor(@RequestParam Integer idImovel) {
+		ModelAndView modelAndView = new ModelAndView("imovel/gerenciar-fotos");
+		
+		List<Foto> fotos = imovelDAO.find(idImovel).getFotos();
+		modelAndView.addObject("fotos", fotos);
+		
+		modelAndView.addObject("idImovel", idImovel);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/excluir-foto-por-corretor")
+	public ModelAndView excluirFotoPorCorretor(Foto foto, @RequestParam String idImovel){
+		ModelAndView modelAndView = new ModelAndView("redirect:/imovel/gerenciar-fotos-por-corretor?idImovel="+idImovel.replace(",", ""));
+		
+		Imovel imovel = imovelDAO.find(Integer.parseInt(idImovel.replace(",", "")));
+		imovel.getFotos().remove(fotoDAO.find(foto.getId()));
+		
+		imovelDAO.alterar(imovel);
+		
+		tratador.removerFoto(fotoDAO.find(foto.getId()).getNomeArquivo());
+		
+		return modelAndView;
 	}
 }
 
