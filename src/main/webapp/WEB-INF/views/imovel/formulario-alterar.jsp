@@ -9,7 +9,10 @@
 <%@ include file="/WEB-INF/views/templates/cabecalho.jsp" %>
 
 			<h1>Formulario</h1>
-			<form action="${s:mvcUrl('IC#alteraImovel').build()}" method="post">
+			<form action="
+					<c:if test="${flag == 'admin'}">${s:mvcUrl('IC#alteraImovel').build()}</c:if>
+					<c:if test="${flag != 'admin'}">${s:mvcUrl('IC#alteraImovelPorCorretor').build()}</c:if>
+				" method="post">
 				<div class="form-group">
 					<label>Nº de referência</label>
 					<input type="text" name="referencia" value="${imovel.referencia}"/>
@@ -17,7 +20,7 @@
 				<div>
 					<label>Descrição</label>
 					<textarea rows="8" cols="40" name="descricao">${imovel.descricao}</textarea>
-				</div>00.0
+				</div>
 				<div>
 					<label>Valor R$</label>
 					<input type="text" name="valor" placeholder="0,00" value="${imovel.valor}"/>
@@ -70,14 +73,27 @@
 						</c:forEach>
 					</select>
 				</div>
+				<c:if test="${flag == 'admin'}">
+					<div>
+						<label>Corretores</label>
+						<select name="idCorretor">
+							<c:forEach items="${corretores}" var="corretor">
+								<option <c:if test="${corretor.id == imovel.corretor.id}">selected</c:if> value="${corretor.id}">${corretor.nome}</option>
+							</c:forEach>
+						</select>
+					</div>
+				</c:if>
 				<input type="hidden" name="id" value="${imovel.id}"/>
-				<input type="hidden" name="idCorretor" value='<security:authentication property="principal.id"/>'/>
+				<c:if test="${flag != 'admin'}">
+					<input type="hidden" name="idCorretor" value='<security:authentication property="principal.id"/>'/>
+				</c:if>
 				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 				<button type="submit">Enviar</button>
 			</form>
 			<br>
 			<br>
-		<a href="${s:mvcUrl('IC#gerenciarFotos').arg(0, imovel.id).build()}"><h2>Gerenciar imagens</h2></a>	
+		<c:if test="${flag != 'admin'}"><a href="${s:mvcUrl('IC#gerenciarFotosPorCorretor').arg(0, imovel.id).build()}"><h2>Gerenciar imagens</h2></a></c:if>
+		<c:if test="${flag == 'admin'}"><a href="${s:mvcUrl('IC#gerenciarFotos').arg(0, imovel.id).build()}"><h2>Gerenciar imagens</h2></a></c:if>	
 			
 		<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 		<script src="${jsPath}/cep.js"></script>

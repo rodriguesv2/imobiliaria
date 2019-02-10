@@ -226,7 +226,7 @@ public class ImovelController {
 	
 	
 	
-	@RequestMapping("/alterar-por-corretor/{id}")
+	@RequestMapping("/por-corretor/alterar/{id}")
 	public ModelAndView formularioAlterarPorCorretor(@PathVariable("id") Integer id) {
 		ModelAndView modelAndView = new ModelAndView("imovel/formulario-alterar");
 		
@@ -240,10 +240,46 @@ public class ImovelController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/salvar-alteracao")
-	public ModelAndView alteraImovel(Imovel imovel, @RequestParam String idCorretor) {
+	@RequestMapping("/alterar/{id}")
+	public ModelAndView formularioAlterar(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView("imovel/formulario-alterar");
+		
+		modelAndView.addObject("tipoImovel", TipoImovel.values());
+		modelAndView.addObject("estadoImovel", EstadoImovel.values());
+		modelAndView.addObject("tipoNegocio", TipoNegocio.values());
+		modelAndView.addObject("corretores", corretorDAO.lista());
+		modelAndView.addObject("flag", "admin");
+		
+		Imovel imovel = imovelDAO.find(id);
+		modelAndView.addObject("imovel", imovel);
+		
+		return modelAndView;
+	}
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/por-corretor/salvar-alteracao")
+	public ModelAndView alteraImovelPorCorretor(Imovel imovel, @RequestParam String idCorretor) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/imovel/lista-do-corretor");
 		
+		alterarGenerico(imovel, idCorretor);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/salvar-alteracao")
+	public ModelAndView alteraImovel(Imovel imovel, @RequestParam String idCorretor) {
+		ModelAndView modelAndView = new ModelAndView("redirect:/imovel/lista");
+		
+		alterarGenerico(imovel, idCorretor);
+		
+		return modelAndView;
+	}
+	
+	
+	private void alterarGenerico(Imovel imovel, String idCorretor) {
 		Corretor corretor = corretorDAO.find(Integer.parseInt(idCorretor.replace(",", "")));
 		Imovel imovelPersistido = imovelDAO.find(imovel.getId());
 		
@@ -252,11 +288,12 @@ public class ImovelController {
 		imovel.setDataCriacao(imovelPersistido.getDataCriacao());
 		
 		imovelDAO.alterar(imovel);
-		
-		return modelAndView;
 	}
 	
-	@RequestMapping("/gerenciar-fotos-por-corretor")
+	
+	
+	
+	@RequestMapping("/por-corretor/gerenciar-fotos")
 	public ModelAndView gerenciarFotosPorCorretor(@RequestParam Integer idImovel) {
 		ModelAndView modelAndView = new ModelAndView("imovel/gerenciar-fotos");
 		
@@ -268,18 +305,47 @@ public class ImovelController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("/excluir-foto-por-corretor")
-	public ModelAndView excluirFotoPorCorretor(Foto foto, @RequestParam String idImovel){
-		ModelAndView modelAndView = new ModelAndView("redirect:/imovel/gerenciar-fotos-por-corretor?idImovel="+idImovel.replace(",", ""));
+	@RequestMapping("/gerenciar-fotos")
+	public ModelAndView gerenciarFotos(@RequestParam Integer idImovel) {
+		ModelAndView modelAndView = new ModelAndView("imovel/gerenciar-fotos");
 		
+		List<Foto> fotos = imovelDAO.find(idImovel).getFotos();
+		modelAndView.addObject("fotos", fotos);
+		modelAndView.addObject("flag", "admin");
+		
+		modelAndView.addObject("idImovel", idImovel);
+		
+		return modelAndView;
+	}
+	
+	
+	
+	
+	@RequestMapping("/por-corretor/excluir-foto")
+	public ModelAndView excluirFotoPorCorretor(Foto foto, @RequestParam String idImovel){
+		ModelAndView modelAndView = new ModelAndView("redirect:/imovel/por-corretor/gerenciar-fotos?idImovel="+idImovel.replace(",", ""));
+		
+		excluirGenerico(foto, idImovel);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/excluir-foto")
+	public ModelAndView excluirFoto(Foto foto, @RequestParam String idImovel){
+		ModelAndView modelAndView = new ModelAndView("redirect:/imovel/gerenciar-fotos?idImovel="+idImovel.replace(",", ""));
+		
+		excluirGenerico(foto, idImovel);
+		
+		return modelAndView;
+	}
+	
+	private void excluirGenerico(Foto foto, String idImovel) {
 		Imovel imovel = imovelDAO.find(Integer.parseInt(idImovel.replace(",", "")));
 		imovel.getFotos().remove(fotoDAO.find(foto.getId()));
 		
 		imovelDAO.alterar(imovel);
 		
 		tratador.removerFoto(fotoDAO.find(foto.getId()).getNomeArquivo());
-		
-		return modelAndView;
 	}
 }
 

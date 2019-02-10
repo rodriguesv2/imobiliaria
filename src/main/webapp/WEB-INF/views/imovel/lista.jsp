@@ -110,7 +110,7 @@
 						<td>${imovel.corretor.nome}</td>
 						<td>
 							<ul class="list-inline">
-								<li class="list-inline-item"><a href="#"><img height="20px" width="20px" alt="Alterar" src="${imgSisPath}/glyphicons-edit.png"></a></li>
+								<li class="list-inline-item"><a href="/imovel/alterar/${imovel.id}"><img height="20px" width="20px" alt="Alterar" src="${imgSisPath}/glyphicons-edit.png"></a></li>
 								<li class="list-inline-item"><a href="/imovel/remover/${imovel.id}"><img height="20px" width="20px" alt="Remover" src="${imgSisPath}/glyphicons-trash.png"></a></li> 
 							</ul>
 							<a class="btn btn-success" href="/imovel/detalhe/${imovel.id}">Detalhe</a>
