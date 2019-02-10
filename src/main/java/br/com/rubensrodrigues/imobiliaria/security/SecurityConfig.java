@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/arquivos-carregados/**").permitAll()
 			.antMatchers("/imovel/detalhe/**").permitAll()
 			.antMatchers("/corretor/alterar-perfil").hasAnyRole("CORRETOR", "ADMIN")
+			.antMatchers("/imovel/por-corretor/**").hasAnyRole("CORRETOR", "ADMIN")
 			.antMatchers("/corretor/alterar-senha", "/corretor/nova-senha").hasAnyRole("CORRETOR", "ADMIN")
 			.antMatchers("/corretor/**").hasAnyRole("ADMIN")
 			.antMatchers("/imovel/**").hasAnyRole("CORRETOR", "ADMIN")
