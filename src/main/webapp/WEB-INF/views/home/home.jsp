@@ -114,7 +114,7 @@
 			  <!-- Footer Elements -->
 			
 			  <div class="container">
-			    <span>R$ ${imovel.valor}</span>
+			    <span>R$ ${imovel.valor} - ${imovel.negocio}</span>
 			  </div>
 			  
 			</footer>

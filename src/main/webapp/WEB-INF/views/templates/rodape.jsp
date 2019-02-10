@@ -11,8 +11,8 @@
         <div class="col-md-6 mt-md-0 mt-3">
 
           <!-- Content -->
-          <h5 class="text-uppercase">Footer Content</h5>
-          <p>Here you can use rows and columns here to organize your footer content.</p>
+          <h5 class="text-uppercase">Imobiliaria</h5>
+          <p>Este é um projeto para fins didaticos e publicado como portifólio. Feito em Java usando Spring Boot e Hibernate.</p>
 
         </div>
         <!-- Grid column -->
@@ -27,40 +27,10 @@
 
             <ul class="list-unstyled">
               <li>
-                <a href="#!">Link 1</a>
+                <a href="https://github.com/rodriguesv2/imobiliaria">Github</a>
               </li>
               <li>
-                <a href="#!">Link 2</a>
-              </li>
-              <li>
-                <a href="#!">Link 3</a>
-              </li>
-              <li>
-                <a href="#!">Link 4</a>
-              </li>
-            </ul>
-
-          </div>
-          <!-- Grid column -->
-
-          <!-- Grid column -->
-          <div class="col-md-3 mb-md-0 mb-3">
-
-            <!-- Links -->
-            <h5 class="text-uppercase">Links</h5>
-
-            <ul class="list-unstyled">
-              <li>
-                <a href="#!">Link 1</a>
-              </li>
-              <li>
-                <a href="#!">Link 2</a>
-              </li>
-              <li>
-                <a href="#!">Link 3</a>
-              </li>
-              <li>
-                <a href="#!">Link 4</a>
+                <a href="https://www.linkedin.com/in/rubens-rodrigues-95ab8b5b/">LinkdIn</a>
               </li>
             </ul>
 
@@ -75,7 +45,7 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2019 Copyright:
-      <a href="#"> Rubens Rodrigues</a>
+      <a href="https://www.linkedin.com/in/rubens-rodrigues-95ab8b5b/"> Rubens Rodrigues</a>
     </div>
     <!-- Copyright -->
 
