@@ -9,4 +9,4 @@ A home possui a lista de todos os imóveis. A home está com a paginação imple
 
 Os próximos passos serão a criação de filtros e busca para a home e para lista de corretores e imóveis. Também será usado Validation para os formularios, que não são a prova e dados mal inserido ainda.
 
-Veja o projeto em produção pelo endereço: http://rubens-spring.eastus.cloudapp.azure.com
+Veja o projeto em produção pelo endereço: http://ec2-18-218-203-116.us-east-2.compute.amazonaws.com/
