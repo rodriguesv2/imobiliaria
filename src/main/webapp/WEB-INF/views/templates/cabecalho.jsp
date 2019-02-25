@@ -8,7 +8,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Imobiliaria</title>
+		<title>Imobiliária</title>
 		<c:url value="/resources/css" var="cssPath"/>
 		<c:url value="/resources/js" var="jsPath"/>
 		<link rel="stylesheet" href="${cssPath}/bootstrap.css">

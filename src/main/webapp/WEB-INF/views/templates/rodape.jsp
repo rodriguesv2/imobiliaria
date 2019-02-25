@@ -11,7 +11,7 @@
         <div class="col-md-6 mt-md-0 mt-3">
 
           <!-- Content -->
-          <h5 class="text-uppercase">Imobiliaria</h5>
+          <h5 class="text-uppercase">Imobiliária</h5>
           <p>Este é um projeto para fins didaticos e publicado como portifólio. Feito em Java usando Spring Boot e Hibernate.</p>
 
         </div>
